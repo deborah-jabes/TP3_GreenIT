@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>TP3 GREEN IT</title>
-	<script type="text/javascript" src="script.js"></script>
+    <meta charset="UTF-8">
+    <title>Instagram Vote Counter</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/sorttable.js"></script>
+
+
 </head>
 <body>
-    <p>Bonjour</p>
+  <div id="main">
+
+    <h1>Rechercher un élève</h1>
+
+    <div id="forms">
+        <form method="post" action="/index.php">
+            <h2>Prénom :</h2>
+            <input type="text" id="Name" name="Name" placeholder="Prénom de la personne" value="">
+            <h2>Nom de famille :</h2>
+            <input type="text" id="SurName" name="SurName" placeholder="Nom de famille de la personne" value="">
+            <h2>PROMOTION : </h2>
+            <SELECT name="promo" size="1">
+                <OPTION>IR3
+                <OPTION>IR4
+                <OPTION>SEP3
+                <OPTION>SEP4
+                </SELECT>
+            <input type="submit" value="Go">
+        </form>
+        <div>
+            <p>LIEN VERS LES MENTIONS LEGALES</p>
+        </div>
+    </div>
+
+    <div id="results">
+
+      
+    </div>
+  </div>
 </body>
 </html>
