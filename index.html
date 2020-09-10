@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <title>Instagram Vote Counter</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/sorttable.js"></script>
-
-
+    <script src="script/script.js"></script>
+    <script type="text/javascript" src="script/IR4.json" ></script>
 </head>
 <body>
   <div id="main">
@@ -32,11 +31,17 @@
             <p>LIEN VERS LES MENTIONS LEGALES</p>
         </div>
     </div>
+  </div>
+  <div id="affichageJson">
 
-    <div id="results">
-
-      
-    </div>
   </div>
 </body>
+<script>
+        document.getElementById("affichageJson").innerHTML="somme";
+        var mydata = JSON.parse(data);
+        alert(mydata[0].name);
+        alert(mydata[0].age);
+        alert(mydata[1].name);
+        alert(mydata[1].age);
+</script>
 </html>
