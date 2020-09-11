@@ -19,13 +19,13 @@
             <h2>Nom de famille :</h2>
             <input type="text" id="SurName" name="SurName" placeholder="Nom de famille de la personne" value="">
             <h2>PROMOTION : </h2>
-            <SELECT name="promo" size="1">
+            <SELECT id="promo" name="promo" size="1" id>
                 <OPTION>IR3
                 <OPTION>IR4
                 <OPTION>SEP3
                 <OPTION>SEP4
-                </SELECT>
-            <input type="submit" value="Go">
+            </SELECT>
+            <input type="submit" value="Go" onclick="getInformation()">
         </form>
         <div>
             <p>LIEN VERS LES MENTIONS LEGALES</p>
@@ -37,11 +37,17 @@
   </div>
 </body>
 <script>
-        document.getElementById("affichageJson").innerHTML="somme";
-        var mydata = JSON.parse(data);
-        alert(mydata[0].name);
-        alert(mydata[0].age);
-        alert(mydata[1].name);
-        alert(mydata[1].age);
+        var fs = require("fs");
+        let json = JSON.parse(fs.readFileSync('script/IR4.json'));
+        const jsonDataParse = JSON.parse(json);
+        document.getElementById("affichageJson").innerHTML=jsonDataParse["students"][0]["firstname"];
+
+        function getInformation(){
+            var Name = document.getElementById("Name").value;
+            var SurName = document.getElementById("SurName").value;
+            var Name = document.getElementById("Name").value;
+            var promo = document.getElementById("promo").value;
+            alert(promo);
+        }
 </script>
 </html>
