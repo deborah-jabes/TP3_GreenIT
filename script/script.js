@@ -19,19 +19,14 @@ var url;
 // give focus to the input field
 $('[name="inputField"]').eq(0).focus();
 
-
 // search
 function search() {
   per_page = $('[name="nbByPage"]').eq(0).val();
   searchText = $('[name="inputField"]').eq(0).val();
   page =$('.pagination--number').eq(0).text();
   // launch search
-  if (dateTo && dateFrom) {
-    url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a19d94b90db447b500a9638a59fcc0a4&text=${searchText}&per_page=${per_page}&page=${page}&min_taken_date=${dateFrom}&max_taken_date=${dateTo}&format=json&nojsoncallback=1`;  
-  } else {
-    url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a19d94b90db447b500a9638a59fcc0a4&text=${searchText}&per_page=${per_page}&page=${page}&format=json&nojsoncallback=1`;
-  }
-  fetch(url)
+  url = 'IR4.json';
+ /* fetch(url)
     .then(response => response.json())
     .then((response) => {
       maxPage =  response.photos.pages;
@@ -39,7 +34,8 @@ function search() {
         $('.pagination--number').eq(0).text(0);
       } else {
         $('.pagination--number').eq(0).text(1);
-      }
+      }*/
+    
       document.getElementsByClassName('pagination--total')[0].innerHTML = maxPage;
       pagination.css('display', 'block');
       if(!tabs.hasClass('active')) {
@@ -53,29 +49,32 @@ function search() {
       // empty list of result
       $('#res').empty();
       $('tbody').eq(0).empty();
-      // create all elements
-      for (let img of response.photos.photo) {
-        let item = $(document.createElement('li'));
-        item.addClass('list--item');
-        item.html(`<img alt="" src="https://farm${img.farm}.staticflickr.com/${img.server}/${img.id}_${img.secret}.jpg">`);
-        // fetch img details
-        fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=a19d94b90db447b500a9638a59fcc0a4&photo_id=${img.id}&format=json&nojsoncallback=1`)
+
+      
+     
+        
+        // fetch student details
+        fetch(url)
             .then(data =>  data.json())
             .then((data) => {
+              var tabStudents = data.students;
 
-              let cell = $(document.createElement('tr'));
-              cell.addClass('table--row');
-              cell.append(`<td><img class="table--vignette" alt="" src="https://farm${img.farm}.staticflickr.com/${img.server}/${img.id}_${img.secret}.jpg"/></td>`);
-              cell.append(`<td>${data.photo.title._content}</td>`);
-              cell.append(`<td>${data.photo.dates.taken}</td>`);
-              cell.append(`<td>${data.photo.owner.realname}(${data.photo.owner.nsid})</td>`);
-              cell.append(`<td>${data.photo.owner.location}</td>`);
-              $('tbody').eq(0).append(cell);
+               // create all elements
+              for (var student in tabStudents) {
+
+                  let cell = $(document.createElement('tr'));
+                  cell.addClass('table--row');
+                  //cell.append(`<td><img class="table--vignette" alt="" src="https://farm${img.farm}.staticflickr.com/${img.server}/${img.id}_${img.secret}.jpg"/></td>`);
+                  cell.append('<td>' + tabStudents[lastname] + '</td>');
+                  cell.append('<td>' + tabStudents[firstname] + '</td>');
+                  cell.append('<td>IR4</td>');
+                  $('tbody').eq(0).append(cell);
+              }
             });
         
         $('#res').append(item);
-      }
-    });
+      
+    
 }
 
 function clear() {
@@ -98,7 +97,7 @@ function clear() {
   $('[name="dateTo"]').val('');
 }
 
-$('[name="dateFrom"]').change((e) => {
+/*$('[name="dateFrom"]').change((e) => {
   dateFrom = e.target.value;
   if ((dateTo && dateFrom) || (!dateTo && !dateFrom)) {
     search()
@@ -111,7 +110,7 @@ $('[name="dateTo"]').change((e) => {
     search();
   }
 });
-
+*/
 // pagination
 $('.form').submit((e) => {
   e.preventDefault();
@@ -153,7 +152,7 @@ pageBtn.click(() => {
   search();
 });
 
-/*// auto complete
+// auto complete
 $("#inputField").autocomplete({
   source : function(requete, reponse){
     fetch(`http://infoweb-ens/~jacquin-c/codePostal/codePostalComplete.php?commune=${$('#inputField').val()}`)
@@ -173,7 +172,7 @@ $("#inputField").autocomplete({
   },
   minLength: 3,
   maxResults: 5,
-}); */ 
+}); 
 
 // dialog
 /*$('#dialog').dialog({
