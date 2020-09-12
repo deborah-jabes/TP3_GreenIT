@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="script/script.js"></script>
     <script type="text/javascript" src="script/IR4.json" ></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
   <div id="main">
@@ -25,9 +26,9 @@
                 <OPTION>SEP3
                 <OPTION>SEP4
             </SELECT>
-            <input type="submit" value="Go" onclick="getInformation()">
+            <input id="buttonSendInfo" type="submit" value="Go" onclick="getInformation()">
         </form>
-        <div>
+        <div id="link">
             <p>LIEN VERS LES MENTIONS LEGALES</p>
         </div>
     </div>
@@ -37,11 +38,12 @@
   </div>
 </body>
 <script>
+    /*
         var fs = require("fs");
         let json = JSON.parse(fs.readFileSync('script/IR4.json'));
         const jsonDataParse = JSON.parse(json);
         document.getElementById("affichageJson").innerHTML=jsonDataParse["students"][0]["firstname"];
-
+        */
         function getInformation(){
             var Name = document.getElementById("Name").value;
             var SurName = document.getElementById("SurName").value;
@@ -49,5 +51,13 @@
             var promo = document.getElementById("promo").value;
             alert(promo);
         }
+        // JQUERY START HERE
+
+        jQuery(document).ready(function($) {
+
+         $("#buttonSendInfo").hide();
+         $.ajax();
+        });
+        // End of JQUERY
 </script>
 </html>
