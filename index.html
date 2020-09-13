@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Instagram Vote Counter</title>
+    <title>TRP3 Green-IT</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="script/script.js"></script>
     <script type="text/javascript" src="script/IR4.json" ></script>
+    <script type="text/javascript" src="serveur.js" ></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
@@ -26,10 +27,13 @@
                 <OPTION>SEP3
                 <OPTION>SEP4
             </SELECT>
-            <input id="buttonSendInfo" type="submit" value="Go" onclick="getInformation()">
+            <input id="buttonSendInfo" type="submit" value="Go" onclick="displayinfo(), getInformation() ">
         </form>
         <div id="link">
             <p>LIEN VERS LES MENTIONS LEGALES</p>
+        </div>
+        <div id="display"> 
+
         </div>
     </div>
   </div>
@@ -38,51 +42,29 @@
   </div>
 </body>
 <script>
+    function displayinfo(){
+        var arr = [];
+        mynumber=10; // nombre de ligne
+        for(var i=1; i<=mynumber; i++) {
+            arr.push(i.toString());
+            document.getElementById("display").innerHTML=arr; //affiche le tableau dans le HTML
+        }
+    }
+        
+
         var mydata=IR4.json;
         alert(mydata);
         function getInformation(){
             var Name = document.getElementById("Name").value;
             var SurName = document.getElementById("SurName").value;
             var Promo = document.getElementById("promo").value;
-            alert(Promo);
+            const request = new XMLHttpRequest();
+            request.open("GET",'serveur.js')
+            xhr.send(Name)
         }
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         // JQUERY START HERE
-
-        jQuery(document).ready(function($) {
-
-         $("#buttonSendInfo").click(function(){
-            
-            $.ajax({
-                url : 'more_com.php', // La ressource ciblée
-                type : 'GET', // Le type de la requête HTTP.
-                data : 'nom=' + Name + 'nomFamille='+ SurName + 'promo='+ Promo ,
-            });
-         
-         });
-         
-        });
-        // End of JQUERY
             /*
         var fs = require("fs");
         let json = JSON.parse(fs.readFileSync('script/IR4.json'));
