@@ -38,26 +38,56 @@
   </div>
 </body>
 <script>
-    /*
+        var mydata=IR4.json;
+        alert(mydata);
+        function getInformation(){
+            var Name = document.getElementById("Name").value;
+            var SurName = document.getElementById("SurName").value;
+            var Promo = document.getElementById("promo").value;
+            alert(Promo);
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // JQUERY START HERE
+
+        jQuery(document).ready(function($) {
+
+         $("#buttonSendInfo").click(function(){
+            
+            $.ajax({
+                url : 'more_com.php', // La ressource ciblée
+                type : 'GET', // Le type de la requête HTTP.
+                data : 'nom=' + Name + 'nomFamille='+ SurName + 'promo='+ Promo ,
+            });
+         
+         });
+         
+        });
+        // End of JQUERY
+            /*
         var fs = require("fs");
         let json = JSON.parse(fs.readFileSync('script/IR4.json'));
         const jsonDataParse = JSON.parse(json);
         document.getElementById("affichageJson").innerHTML=jsonDataParse["students"][0]["firstname"];
         */
-        function getInformation(){
-            var Name = document.getElementById("Name").value;
-            var SurName = document.getElementById("SurName").value;
-            var Name = document.getElementById("Name").value;
-            var promo = document.getElementById("promo").value;
-            alert(promo);
-        }
-        // JQUERY START HERE
-
-        jQuery(document).ready(function($) {
-
-         $("#buttonSendInfo").hide();
-         $.ajax();
-        });
-        // End of JQUERY
 </script>
 </html>
