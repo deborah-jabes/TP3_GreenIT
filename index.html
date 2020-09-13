@@ -45,6 +45,10 @@
     function displayinfo(){
         var arr = [];
         mynumber=10; // nombre de ligne
+        name="";
+        Surnam="";
+        Promo="";
+        var InfoEtudiant =[]; // si reception des étudiants en tableau (faire dans le for un InfoEtudiant[i].name ...)
         for(var i=1; i<=mynumber; i++) {
             arr.push(i.toString());
             document.getElementById("display").innerHTML=arr; //affiche le tableau dans le HTML
