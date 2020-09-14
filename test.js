@@ -103,62 +103,10 @@ app.get("/", (req, res) => {
 });*/
 
 app.listen (process.env.ALWAYSDATA_HTTPD_PORT, process.env.ALWAYSDATA_HTTPD_IP, function(){
-    console.log('Server listing at https://alwaysdata.net:%s', port);
+    console.log('Server listing at https://alwaysdata.net:%s',port);
 });
 
-function parse_answer(json_document) {
 
-    const dom = new JSDOM(``, {
-      url: "./public/index.html",
-      //url: "http://example.org/",
-      //referrer: "https://example.com/",
-      contentType: "text/html",
-      includeNodeLocations: true,
-      storageQuota: 10000000
-    });
-
-    var document = dom.document;
-
-    var myDiv = document.getElementById('tab-table');
-
-    var myTable = document.createElement("table");
-
-    var headerTable = document.createElement("tr");
-
-    var thLastname = document.createElement("th");
-    thLastname.innerHTML = "Lastname";
-    headerTable.appendChild(thLastname);
-
-    var thFirstname = document.createElement("th");
-    thFirstname.innerHTML = "Fisrtname";
-    headerTable.appendChild(thFirstname);
-
-    var thBirthdate = document.createElement("th");
-    thBirthdate.innerHTML = "Birthdate";
-    headerTable.appendChild(thBirthdate);
-
-    myTable.appendChild(headerTable);
-
-    json_document.forEach(element => {
-        var student = document.createElement("tr");
-        
-        var tdLastname = document.createElement("td");
-        tdLastname.innerHTML = element.lastname;
-        student.appendChild(tdLastname);
-    
-        var tdFirstname = document.createElement("td");
-        tdFirstname.innerHTML = element.firstname;
-        student.appendChild(tdFirstname);
-    
-        var tdBirthdate = document.createElement("td");
-        tdBirthdate.innerHTML = element.birthdate;
-        student.appendChild(tdBirthdate);
-
-        myTable.appendChild(student)
-    });
-
-    myDiv.appendChild(myTable)
-}
 
     
 
