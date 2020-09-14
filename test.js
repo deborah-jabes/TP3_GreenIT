@@ -2,9 +2,6 @@ var express = require("express");
 var path = require ("path");
 var app = express();
 var port = process.env.PORT || 3000;
-const jsdom = require ('jsdom');
-const {JSDOM} = jsdom;
-var util = require('util')
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -97,14 +94,11 @@ app.get("/", (req, res) => {
     res.sendFile (__dirname + "/public/index.html");
 });
 
-/*app.listen(port, process.env.IP, () => {
+app.listen(port, process.env.IP, () => {
     console.log("Server listening on port " + port);
 
-});*/
-
-app.listen (process.env.ALWAYSDATA_HTTPD_PORT, process.env.ALWAYSDATA_HTTPD_IP, function(){
-    console.log('Server listing at https://alwaysdata.net:%s',port);
 });
+
 
 
 
