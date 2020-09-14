@@ -4,6 +4,7 @@ var app = express();
 var port = process.env.PORT || 3000;
 const jsdom = require ('jsdom');
 const {JSDOM} = jsdom;
+var util = require('util')
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -20,61 +21,74 @@ client.connect (function (err) {
     }
 
     else {
-        console.log ("Connected successfully !"); 
+        console.log ("Connected successfully!"); 
 
         app.post ('/find', function (req, res, next) {
         var promoOuChercher = req.body.promotion;
-        client.db ("Students").collection ("IR3").find({}).toArray (function (err, result) {
-            if (err)
-                throw err;  
-            // var divTab = document.createElement ("div");
-            /*const dom = new JSDOM ('', 
-                {runScripts : "dangerously"})
-            .window;
 
-            document = window.document;
-            html = document.firstChild;
-            content = document.body.appendChild(document.createElement("div"));
-            content.id = "divTab";
-            content.innerHTML = ``;            
+        /*console.log (req.body);
+        console.log (req.body.firstname);*/
 
-            dom.window.document.body.children.length === 2;*/
-            //console.log (result);
-            var firstname = req.body.firstname;
-            firstname = firstname.charAt(0).toUpperCase();
+        var firstname = req.body.firstname;
+        firstname.charAt(0).toUpperCase();
 
-            var lastname = req.body.lastname;
-            lastname = lastname.charAt(0).toUpperCase();
+        var lastname = req.body.lastname;
+        lastname.charAt(0).toUpperCase();
 
-            if (firstname.contains("$") || lastname.contains("$")) {
-                app.send ("error, your entries contains some unauthorized caracter");
+        var db = client.db ("Students").collection("IR3");
+
+        if (firstname.includes("$") || lastname.includes("$")) {
+                res.send ("error, your entries contains some unauthorized caracter");
             }
             else {
+                    var resultBDD;
+                    db.find({promotion : req.body.promotion, firstname : firstname, lastname : lastname}).toArray (function (err, result) {
+                        if (err)
+                            throw err;
+                        else {
+                            //parse_answer (result);
+                            res.send (result);
+                        }
+                    });
+                }
 
-                if (lastname == "" && firstname == "") {
-                    db.Students().find({promotion : "promotion"});
+
+                /*if (lastname == "" && firstname == "") {
+                    db.find({promotion : req.body.promotion}).toArray (function (err, result) {
+                        if (err)
+                            throw err;
+                        else {
+                            //parse_answer (result);
+                            resultBDD = result;
+                            //.send (result);
+                        }
+                    });
                 }
 
                 else if (lastname == "") {
-                    db.Students().find({promotion : req.body.promotion, firstname : firstname});
+                    resultBDD = db.find({promotion : req.body.promotion, firstname : firstname});
                 }
 
                 else if (firstname == "") {
-                    db.Students().find({promotion : req.body.promotion, lastname : lastname});
+                    resultBDD = db.find({promotion : req.body.promotion, lastname : lastname});
                 }
                 
                 else {
-                    db.Students().find({promotion : req.body.promotion, firstname : firstname, lastname : lastname});
-                }
 
-            }
-        });
+                    resultBDD = db.find({promotion : req.body.promotion, firstname : firstname, lastname : lastname});
+                }
+                res.send(resultBDD);
+
+            }*/
+
+        
+                     
 
     });//app.post()
     }
 
    
-});
+});//client.connect()
 //Access to the files (css and html) in 'public' folder
 app.use (express.static (path.join (__dirname, 'public')));
 
@@ -83,7 +97,70 @@ app.get("/", (req, res) => {
     res.sendFile (__dirname + "/public/index.html");
 });
 
-app.listen(port, () => {
+/*app.listen(port, process.env.IP, () => {
     console.log("Server listening on port " + port);
 
+});*/
+
+app.listen (process.env.ALWAYSDATA_HTTPD_PORT, process.env.ALWAYSDATA_HTTPD_IP, function(){
+    console.log('Server listing at https://alwaysdata.net:%s', port);
 });
+
+function parse_answer(json_document) {
+
+    const dom = new JSDOM(``, {
+      url: "./public/index.html",
+      //url: "http://example.org/",
+      //referrer: "https://example.com/",
+      contentType: "text/html",
+      includeNodeLocations: true,
+      storageQuota: 10000000
+    });
+
+    var document = dom.document;
+
+    var myDiv = document.getElementById('tab-table');
+
+    var myTable = document.createElement("table");
+
+    var headerTable = document.createElement("tr");
+
+    var thLastname = document.createElement("th");
+    thLastname.innerHTML = "Lastname";
+    headerTable.appendChild(thLastname);
+
+    var thFirstname = document.createElement("th");
+    thFirstname.innerHTML = "Fisrtname";
+    headerTable.appendChild(thFirstname);
+
+    var thBirthdate = document.createElement("th");
+    thBirthdate.innerHTML = "Birthdate";
+    headerTable.appendChild(thBirthdate);
+
+    myTable.appendChild(headerTable);
+
+    json_document.forEach(element => {
+        var student = document.createElement("tr");
+        
+        var tdLastname = document.createElement("td");
+        tdLastname.innerHTML = element.lastname;
+        student.appendChild(tdLastname);
+    
+        var tdFirstname = document.createElement("td");
+        tdFirstname.innerHTML = element.firstname;
+        student.appendChild(tdFirstname);
+    
+        var tdBirthdate = document.createElement("td");
+        tdBirthdate.innerHTML = element.birthdate;
+        student.appendChild(tdBirthdate);
+
+        myTable.appendChild(student)
+    });
+
+    myDiv.appendChild(myTable)
+}
+
+    
+
+    
+

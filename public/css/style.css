@@ -15,7 +15,11 @@
   background-color: #96c3d1;
 }
 
-.form {
+
+.container {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: flex-end;
   background: linear-gradient(120deg, #96c3d1, #cbd7f9);
   width: 100%;
   height: 100px;
@@ -23,12 +27,6 @@
   justify-content: center;
   align-items: center;
   padding: 1rem; 
-}
-
-.container {
-  display: inline-flex;
-  justify-content: flex-start;
-  align-items: flex-end;
 }
 
 .input-group {
@@ -205,9 +203,7 @@ tr th:not(:first-child):hover {
   height: 50px;
 }
 
-[class^="tab-"] {
-  display: none;
-}
+
 
 [class^="tab-"].active {
   display: block;
