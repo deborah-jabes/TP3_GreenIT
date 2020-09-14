@@ -52,11 +52,6 @@
   xhttp.open("POST", "/find", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("lastname="+ lastname +"&firstname=" + firstname + "&promotion=" + promotion);
-  //xhttp.send("lastname="+ lastname +"&firstname=" + firstname);
-
-
-
-  //xhttp.send("lastname=Viens&firstname=Campbell&promotion=IR3");
   }
 
 </script>
@@ -66,11 +61,11 @@
       <div class="container">
         <div class="input-group">
           <label class="label" for="inputField">Nom</label>
-          <input id="lastname" class="input" name="lastname" type="text" placeholder="ex: Arnoux" required />
+          <input id="lastname" class="input" name="lastname" type="text" placeholder="ex: Trottier" required />
         </div>
         <div>
           <label class="label" for="inputField">Prénom</label>
-          <input id="firstname" class="input" name="firstname" type="text" placeholder="ex: Jérôme" required/>
+          <input id="firstname" class="input" name="firstname" type="text" placeholder="ex: Zurie" required/>
         </div>
         <div class="input-group">
           <label class="label" for="nbByPage">Nombre de résultats par page</label>
