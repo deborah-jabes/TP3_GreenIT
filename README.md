@@ -1,8 +1,6 @@
 # TP3_GreenIT
 TP3 GreenIT esaip 2020
 
-<h1>TP3 GreenIT</h1>
-
 <p>Nous avons créé un site qui permet de rechercher des élèves parmi les différentes promotions de l'Esaip, en local.</p><br>
 <p>Il repose sur une base de données MongoDB Atlas et fonctionne en local. Il se présente sous la forme q'une application NodeJS à lancer avec la commande "node searchEngine.js".</p><br>
 
